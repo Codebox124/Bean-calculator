@@ -150,13 +150,12 @@
             var singles = parseInt(document.getElementById('singles').value);
             var doubles = parseInt(document.getElementById('doubles').value);
 
-            // Calculate daily total cost for singles and doubles
-            var dailyTotal = (singles * singleShotPrice) + (doubles * doubleShotPrice);
+           
+            var dailyTotal = (singles * singleShotWeight) + (doubles * doubleShotWeight);
 
-            // Calculate monthly total
             var monthlyTotal = (dailyTotal * 365) / 12;
-
-            // Format monthly total based on conditions
+            
+          
             var formattedMonthlyTotal;
             if (monthlyTotal >= 1) {
                 formattedMonthlyTotal = monthlyTotal.toFixed(2) + " kg";
