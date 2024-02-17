@@ -9,8 +9,8 @@
     <style>
         @font-face {
             font-family: 'Sohne';
-            src: url('/font/So╠êhne-Extraleicht.otf') format('opentype');
-            /* Path to the .otf font file */
+            src: url('/font/So╠êhneBreit-Leicht.otf') format('opentype');
+           
         }
 
         body {
@@ -22,6 +22,7 @@
         #total span {
             font-family: 'Sohne', sans-serif;
         }
+        
     </style>
 
 
@@ -32,8 +33,8 @@
         <h1 class="text-3xl text-center font-bold mb-4">Bean Calculator</h1>
 
         <div class="flex flex-col space-y-4">
-            <div style="border-color: rgb(88, 51, 51);" class="flex justify-between px-4 border-b-2  ">
-                <label for="drink" class="font-medium pb-3">Each day we drink:</label>
+            <div style="border-color: rgb(88, 51, 51);" class="flex items-center justify-between px-4 border-b-2  ">
+                <label for="drink" class="font-bold uppercase ">Each day we drink..</label>
                 <select style="border-color: rgb(88, 51, 51);" id="drink"
                     class="px-4 py-2 border-t-2 border-l-2 border-r-2  bg-transparent px-2 focus:outline-none focus:border-blue-500">
                     <option value="triple_o">Triple O</option>
@@ -46,16 +47,29 @@
                 </select>
             </div>
 
-            <div class="md:flex px-4  md:flex-row flex-col items-center  justify-between">
-                <div class="flex flex-col  gap-7">
-                    <div>
-                        <label for="singles" class="font-medium">Singles:</label>
+            <div class="md:flex px-4 gap-9  md:flex-row flex-col items-center   justify-between">
+                <div class="flex flex-col mt-20  md:mt-5  gap-7">
+                    <div class="flex gap-2">
+                        <label for="singles" class="font-bold uppercase">Singles </label>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="213px"
+                            height="22px" viewBox="0 0 213 22" version="1.1">
+                            <title>arrow-right-feathericons</title>
+                            <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <g id="arrow-right-feathericons" transform="translate(1.000000, 0.000000)"
+                                    stroke="#494949">
+                                    <line x1="0" y1="11" x2="210" y2="11" id="Path" />
+
+                                </g>
+                            </g>
+                        </svg>
                     </div>
                     <div class="flex justify-between items-center gap-7">
                         <button onclick="decreaseValue('singles')"
                             class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">-</button>
                         <input type="number" id="singles"
-                            class="  py-2 text-4xl font-medium bg-transparent outline-none border-none focus-none text-center md:w-16 w-24 pl-2" value="0">
+                            class="  py-2 text-4xl font-medium bg-transparent outline-none border-none focus-none text-center md:w-16 w-24 pl-2"
+                            value="0">
                         <button onclick="increaseValue('singles')"
                             class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">+</button>
                     </div>
@@ -71,17 +85,32 @@
                             <option value="9">9g</option>
                             <option value="10">10g</option>
                         </select>
-                        <div>FROM <span id="single-shot-price"></span> PER SHOT</div>
+                        <div>FROM <span class="font-bold" id="single-shot-price"></span> PER SHOT</div>
                     </div>
                 </div>
 
-                <div class="flex  flex-col mt-8  gap-7">
-                    <label for="doubles" class="font-medium">Doubles:</label>
+                <div class="flex  flex-col md:mt-5 mt-20  gap-7">
+                    <div class="flex gap-2">
+                        <label for="doubles" class="font-bold uppercase">Doubles</label>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="213px"
+                        height="22px" viewBox="0 0 213 22" version="1.1">
+                        <title>arrow-right-feathericons</title>
+                        <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <g id="arrow-right-feathericons" transform="translate(1.000000, 0.000000)"
+                                stroke="#494949">
+                                <line x1="0" y1="11" x2="210" y2="11" id="Path" />
+
+                            </g>
+                        </g>
+                    </svg>
+                    </div>
                     <div class="flex justify-between items-center gap-7">
                         <button onclick="decreaseValue('doubles')"
                             class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">-</button>
                         <input type="number" id="doubles"
-                            class="  py-2 text-4xl font-medium  outline-none border-none focus-none bg-transparent md:w-16 w-24 text-center pl-2" value="0">
+                            class="  py-2 text-4xl font-medium  outline-none border-none focus-none bg-transparent md:w-16 w-24 text-center pl-2"
+                            value="0">
                         <button onclick="increaseValue('doubles')"
                             class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">+</button>
                     </div>
@@ -101,15 +130,15 @@
                             <option value="23">23g</option>
                             <option value="24">24g</option>
                         </select>
-                        <div>FROM <span class="font-bold" id="double-shot-price">0.00Kg</span> PER SHOT</div>
+                        <div>FROM <span class="font-bold" id="double-shot-price"></span> PER SHOT </div>
                     </div>
                 </div>
 
             </div>
             <div id="total" style="background-color:  #656262;"
                 class="mt-4 flex flex-col gap-3 font-medium bg-stone-700 py-10 text-white px-4 text-center ">
-                <h1 class="text-xl">PER MONTH YOU NEED : </h1>
-                <P class="text-red-600">Monthly Total:</P>
+                <h1 class="text-xl">PER MONTH I NEED TO ORDER... </h1>
+             
                 <span class="text-4xl" id="monthly-total"></span>
             </div>
 
@@ -156,12 +185,12 @@
 
             var singleShotPrice = (pricePerGram / 1000) * singleShotWeight;
 
-            document.getElementById('single-shot-price').innerHTML = "$" + singleShotPrice.toFixed(2) + " PER SHOT";
+            document.getElementById('single-shot-price').innerHTML = "$" + singleShotPrice.toFixed(2);
 
 
             var doubleShotPrice = (pricePerGram / 1000) * doubleShotWeight;
 
-            document.getElementById('double-shot-price').innerHTML = "$" + doubleShotPrice.toFixed(2) + " PER SHOT";
+            document.getElementById('double-shot-price').innerHTML = "$" + doubleShotPrice.toFixed(2);
 
             var singles = parseInt(document.getElementById('singles').value);
             var doubles = parseInt(document.getElementById('doubles').value);
