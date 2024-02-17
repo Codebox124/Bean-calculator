@@ -29,7 +29,7 @@
             </div>
 
             <div class="md:flex  md:flex-row flex-col items-center  justify-between">
-                <div class="flex flex-col mb-8 gap-7">
+                <div class="flex flex-col  gap-7">
                     <div>
                         <label for="singles" class="font-medium">Singles:</label>
                     </div>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-7">
+                <div class="flex flex-col  gap-7">
                     <label for="doubles" class="font-medium">Doubles:</label>
                     <div class="flex items-center gap-7">
                         <button onclick="decreaseValue('doubles')"
@@ -151,7 +151,7 @@
             var doubles = parseInt(document.getElementById('doubles').value);
 
             // Calculate daily total cost for singles and doubles
-            var dailyTotal = singles * singleShotPrice + doubles * doubleShotPrice;
+            var dailyTotal = (singles * singleShotPrice) + (doubles * doubleShotPrice);
 
             // Calculate monthly total
             var monthlyTotal = (dailyTotal * 365) / 12;
