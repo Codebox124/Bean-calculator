@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Subscription Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto max-w-3xl mt-8 p-4">
+        <h1 class="text-3xl text-center font-bold mb-4">Bean Calculator</h1>
+
+        <div class="flex flex-col space-y-4">
+            <div style="border-color: rgb(88, 51, 51);" class="flex justify-between  border-b-2  ">
+                <label for="drink" class="font-medium pb-3">Each day we drink:</label>
+                <select style="border-color: rgb(88, 51, 51);" id="drink"
+                    class="px-4 py-2 border-t-2 border-l-2 border-r-2  bg-transparent px-2 focus:outline-none focus:border-blue-500">
+                    <option value="triple_o">Triple O</option>
+                    <option value="bingo_bango">Bingo Bango</option>
+                    <option value="debuzzed">Debuzzed</option>
+                    <option value="cherry_bombe">Cherry Bombe</option>
+                    <option value="fully_stoked">Fully Stoked</option>
+                    <option value="high_jinks">High Jinks</option>
+                    <option value="playground">Playground</option>
+                </select>
+            </div>
+
+            <div class="md:flex  md:flex-row flex-col items-center  justify-between">
+                <div class="flex flex-col mb-8 gap-7">
+                    <div>
+                        <label for="singles" class="font-medium">Singles:</label>
+                    </div>
+                    <div class="flex items-center gap-7">
+                        <button onclick="decreaseValue('singles')"
+                            class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">-</button>
+                        <input type="number" id="singles"
+                            class="  py-2 text-4xl font-medium bg-transparent text-center w-16 pl-2" value="0">
+                        <button onclick="increaseValue('singles')"
+                            class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">+</button>
+                    </div>
+                    <div class="flex gap-2 items-center">
+
+                        <select id="singles-grams"
+                            class="px-4 py-2 border rounded-md bg-transparent focus:outline-none focus:border-blue-500">
+                            <option value="4">4g</option>
+                            <option value="5">5g</option>
+                            <option value="6">6g</option>
+                            <option value="7">7g</option>
+                            <option value="8" selected>8g</option>
+                            <option value="9">9g</option>
+                            <option value="10">10g</option>
+                        </select>
+                        <div>FROM <span id="single-shot-price"></span> PER SHOT</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-7">
+                    <label for="doubles" class="font-medium">Doubles:</label>
+                    <div class="flex items-center gap-7">
+                        <button onclick="decreaseValue('doubles')"
+                            class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">-</button>
+                        <input type="number" id="doubles"
+                            class="  py-2 text-4xl font-medium bg-transparent w-16 text-center pl-2" value="0">
+                        <button onclick="increaseValue('doubles')"
+                            class="px-2 py-1 text-2xl rounded-full h-14 bg-white w-14 ">+</button>
+                    </div>
+
+                    <div class="flex gap-2 items-center">
+                        <select id="doubles-grams"
+                            class="px-4 py-2 border bg-transparent rounded-md focus:outline-none focus:border-blue-500">
+                            <option value="14">14g</option>
+                            <option value="15">15g</option>
+                            <option value="16">16g</option>
+                            <option value="17">17g</option>
+                            <option value="18">18g</option>
+                            <option value="19">19g</option>
+                            <option value="20" selected>20g</option>
+                            <option value="21">21g</option>
+                            <option value="22">22g</option>
+                            <option value="23">23g</option>
+                            <option value="24">24g</option>
+                        </select>
+                        <div>FROM <span id="double-shot-price">0.00Kg</span> PER SHOT</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="total" style="background-color:  #44403c;" class="mt-4 flex flex-col gap-3 font-medium bg-stone-700 py-10 text-white px-4 text-center ">
+                <h1 class="text-xl">PER MONTH YOU NEED : </h1>
+                <P class="text-red-600">Monthly Total:</P>
+                 <span class="text-4xl" id="monthly-total"></span>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        // Define coffee prices in grams
+        var coffeePrices = {
+            "triple_o": 55,
+            "bingo_bango": 58,
+            "debuzzed": 69,
+            "cherry_bombe": 65,
+            "fully_stoked": 70,
+            "high_jinks": 61,
+            "playground": 70
+        };
+
+        // Function to decrease value
+        function decreaseValue(inputId) {
+            var currentValue = parseInt(document.getElementById(inputId).value);
+            if (!isNaN(currentValue) && currentValue > 0) {
+                document.getElementById(inputId).value = currentValue - 1;
+                calculateTotal();
+            }
+        }
+
+        // Function to increase value
+        function increaseValue(inputId) {
+            var currentValue = parseInt(document.getElementById(inputId).value);
+            if (!isNaN(currentValue)) {
+                document.getElementById(inputId).value = currentValue + 1;
+                calculateTotal();
+            }
+        }
+
+        // Function to calculate total
+        function calculateTotal() {
+            var selectedCoffee = document.getElementById('drink').value;
+            var singleShotWeight = parseFloat(document.getElementById('singles-grams').value);
+            var doubleShotWeight = parseFloat(document.getElementById('doubles-grams').value);
+
+            // Get price per gram for selected coffee
+            var pricePerGram = coffeePrices[selectedCoffee];
+
+            // Calculate single shot price
+            var singleShotPrice = (pricePerGram / 1000) * singleShotWeight;
+
+            // Set single shot price display
+            document.getElementById('single-shot-price').innerHTML = "$" + singleShotPrice.toFixed(2) + " PER SHOT";
+
+            // Calculate double shot price
+            var doubleShotPrice = (pricePerGram / 1000) * doubleShotWeight;
+
+            // Set double shot price display
+            document.getElementById('double-shot-price').innerHTML = "$" + doubleShotPrice.toFixed(2) + " PER SHOT";
+
+            var singles = parseInt(document.getElementById('singles').value);
+            var doubles = parseInt(document.getElementById('doubles').value);
+
+            // Calculate daily total cost for singles and doubles
+            var dailyTotal = singles * singleShotPrice + doubles * doubleShotPrice;
+
+            // Calculate monthly total
+            var monthlyTotal = (dailyTotal * 365) / 12;
+
+            // Format monthly total based on conditions
+            var formattedMonthlyTotal;
+            if (monthlyTotal >= 1) {
+                formattedMonthlyTotal = monthlyTotal.toFixed(2) + " kg";
+            } else {
+                formattedMonthlyTotal = (monthlyTotal * 1000).toFixed(0) + "g";
+            }
+
+            // Display monthly total
+            document.getElementById('monthly-total').textContent = formattedMonthlyTotal;
+
+        }
+
+        // Add event listeners for inputs
+        document.getElementById('singles').addEventListener('change', calculateTotal);
+        document.getElementById('doubles').addEventListener('change', calculateTotal);
+        document.getElementById('singles-grams').addEventListener('change', calculateTotal);
+        document.getElementById('doubles-grams').addEventListener('change', calculateTotal);
+        document.getElementById('drink').addEventListener('change', calculateTotal);
+
+        // Initial calculation
+        calculateTotal();
+
+    </script>
+
+    <!-- <script>
+        // Define coffee prices per gram
+        const coffeePrices = {
+            triple_o: 55 / 1000, // $55 for 1000g
+            bingo_bango: 58 / 1000, // $58 for 1000g
+            debuzzed: 69 / 1000, // $69 for 1000g
+            cherry_bombe: 65 / 1000, // $65 for 1000g
+            fully_stoked: 70 / 1000, // $70 for 1000g
+            high_jinks: 61 / 1000, // $61 for 1000g
+            playground: 70 / 1000 // $70 for 1000g
+        };
+
+        function increaseValue(type) {
+            const input = document.getElementById(type);
+            input.value = parseInt(input.value) + 1;
+            calculateResults();
+        }
+
+        function decreaseValue(type) {
+            const input = document.getElementById(type);
+            const value = parseInt(input.value) - 1;
+            input.value = value < 0 ? 0 : value;
+            calculateResults();
+        }
+
+        function calculateResults() {
+            const singles = parseInt(document.getElementById('singles').value);
+            const singlesGrams = parseInt(document.getElementById('singles-grams').value);
+            const doubles = parseInt(document.getElementById('doubles').value);
+            const doublesGrams = parseInt(document.getElementById('doubles-grams').value);
+            const selectedCoffee = document.getElementById('drink').value;
+
+            document.getElementById('single-shot-price').innerText = `Single Shot Price: $${(coffeePrices[selectedCoffee] * singlesGrams).toFixed(2)}`;
+            document.getElementById('double-shot-price').innerText = `Double Shot Price: $${(coffeePrices[selectedCoffee] * doublesGrams).toFixed(2)}`;
+            const dailyTotal = (singles * singlesGrams * coffeePrices[selectedCoffee]) + (doubles * doublesGrams * coffeePrices[selectedCoffee]);
+            const monthlyTotal = ((dailyTotal * 365) / 12).toFixed(2);
+            let formattedTotal;
+            if (monthlyTotal > 999) {
+                formattedTotal = `${(monthlyTotal / 1000).toFixed(2)} kg`;
+            } else {
+                formattedTotal = `${monthlyTotal} g`;
+            }
+            document.getElementById('total').innerText = `Monthly Total: ${formattedTotal}`;
+        }
+
+        function calculateTotal() {
+            const singles = parseInt(document.getElementById('singles').value);
+            const singlesGrams = parseInt(document.getElementById('singles-grams').value);
+            const doubles = parseInt(document.getElementById('doubles').value);
+            const doublesGrams = parseInt(document.getElementById('doubles-grams').value);
+            const selectedCoffee = document.getElementById('drink').value;
+
+            const singlesPrice = singles * singlesGrams * coffeePrices[selectedCoffee]; // Calculate cost based on selected coffee price
+            const doublesPrice = doubles * doublesGrams * coffeePrices[selectedCoffee]; // Calculate cost based on selected coffee price
+
+            const totalPrice = singlesPrice + doublesPrice;
+        }
+    </script> -->
+</body>
+
+</html>
