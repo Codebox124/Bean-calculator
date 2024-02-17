@@ -88,12 +88,13 @@
                 </div>
 
             </div>
-            <div id="total" style="background-color:  #44403c;" class="mt-4 flex flex-col gap-3 font-medium bg-stone-700 py-10 text-white px-4 text-center ">
+            <div id="total" style="background-color:  #44403c;"
+                class="mt-4 flex flex-col gap-3 font-medium bg-stone-700 py-10 text-white px-4 text-center ">
                 <h1 class="text-xl">PER MONTH YOU NEED : </h1>
                 <P class="text-red-600">Monthly Total:</P>
-                 <span class="text-4xl" id="monthly-total"></span>
+                <span class="text-4xl" id="monthly-total"></span>
             </div>
-            
+
         </div>
     </div>
     <script>
@@ -150,17 +151,17 @@
             var singles = parseInt(document.getElementById('singles').value);
             var doubles = parseInt(document.getElementById('doubles').value);
 
-           
+
             var dailyTotal = (singles * singleShotWeight) + (doubles * doubleShotWeight);
 
             var monthlyTotal = (dailyTotal * 365) / 12;
-            
-          
+
+
             var formattedMonthlyTotal;
-            if (monthlyTotal >= 1) {
-                formattedMonthlyTotal = monthlyTotal.toFixed(2) + " kg";
+            if (monthlyTotal <= 999) {
+                formattedMonthlyTotal = monthlyTotal.toFixed(0) + "g"; 
             } else {
-                formattedMonthlyTotal = (monthlyTotal * 1000).toFixed(0) + "g";
+                formattedMonthlyTotal = (monthlyTotal / 1000).toFixed(1) + "kg"; 
             }
 
             // Display monthly total
