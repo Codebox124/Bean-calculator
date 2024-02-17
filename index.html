@@ -98,7 +98,7 @@
         </div>
     </div>
     <script>
-        // Define coffee prices in grams
+
         var coffeePrices = {
             "triple_o": 55,
             "bingo_bango": 58,
@@ -109,7 +109,7 @@
             "playground": 70
         };
 
-        // Function to decrease value
+
         function decreaseValue(inputId) {
             var currentValue = parseInt(document.getElementById(inputId).value);
             if (!isNaN(currentValue) && currentValue > 0) {
@@ -118,7 +118,7 @@
             }
         }
 
-        // Function to increase value
+
         function increaseValue(inputId) {
             var currentValue = parseInt(document.getElementById(inputId).value);
             if (!isNaN(currentValue)) {
@@ -127,25 +127,22 @@
             }
         }
 
-        // Function to calculate total
+
         function calculateTotal() {
             var selectedCoffee = document.getElementById('drink').value;
             var singleShotWeight = parseFloat(document.getElementById('singles-grams').value);
             var doubleShotWeight = parseFloat(document.getElementById('doubles-grams').value);
 
-            // Get price per gram for selected coffee
             var pricePerGram = coffeePrices[selectedCoffee];
 
-            // Calculate single shot price
+
             var singleShotPrice = (pricePerGram / 1000) * singleShotWeight;
 
-            // Set single shot price display
             document.getElementById('single-shot-price').innerHTML = "$" + singleShotPrice.toFixed(2) + " PER SHOT";
 
-            // Calculate double shot price
+
             var doubleShotPrice = (pricePerGram / 1000) * doubleShotWeight;
 
-            // Set double shot price display
             document.getElementById('double-shot-price').innerHTML = "$" + doubleShotPrice.toFixed(2) + " PER SHOT";
 
             var singles = parseInt(document.getElementById('singles').value);
@@ -159,86 +156,28 @@
 
             var formattedMonthlyTotal;
             if (monthlyTotal <= 999) {
-                formattedMonthlyTotal = monthlyTotal.toFixed(0) + "g"; 
+                formattedMonthlyTotal = monthlyTotal.toFixed(0) + "g";
             } else {
-                formattedMonthlyTotal = (monthlyTotal / 1000).toFixed(1) + "kg"; 
+                formattedMonthlyTotal = (monthlyTotal / 1000).toFixed(1) + "kg";
             }
 
-            // Display monthly total
+
             document.getElementById('monthly-total').textContent = formattedMonthlyTotal;
 
         }
 
-        // Add event listeners for inputs
         document.getElementById('singles').addEventListener('change', calculateTotal);
         document.getElementById('doubles').addEventListener('change', calculateTotal);
         document.getElementById('singles-grams').addEventListener('change', calculateTotal);
         document.getElementById('doubles-grams').addEventListener('change', calculateTotal);
         document.getElementById('drink').addEventListener('change', calculateTotal);
 
-        // Initial calculation
+
         calculateTotal();
 
     </script>
 
-    <!-- <script>
-        // Define coffee prices per gram
-        const coffeePrices = {
-            triple_o: 55 / 1000, // $55 for 1000g
-            bingo_bango: 58 / 1000, // $58 for 1000g
-            debuzzed: 69 / 1000, // $69 for 1000g
-            cherry_bombe: 65 / 1000, // $65 for 1000g
-            fully_stoked: 70 / 1000, // $70 for 1000g
-            high_jinks: 61 / 1000, // $61 for 1000g
-            playground: 70 / 1000 // $70 for 1000g
-        };
 
-        function increaseValue(type) {
-            const input = document.getElementById(type);
-            input.value = parseInt(input.value) + 1;
-            calculateResults();
-        }
-
-        function decreaseValue(type) {
-            const input = document.getElementById(type);
-            const value = parseInt(input.value) - 1;
-            input.value = value < 0 ? 0 : value;
-            calculateResults();
-        }
-
-        function calculateResults() {
-            const singles = parseInt(document.getElementById('singles').value);
-            const singlesGrams = parseInt(document.getElementById('singles-grams').value);
-            const doubles = parseInt(document.getElementById('doubles').value);
-            const doublesGrams = parseInt(document.getElementById('doubles-grams').value);
-            const selectedCoffee = document.getElementById('drink').value;
-
-            document.getElementById('single-shot-price').innerText = `Single Shot Price: $${(coffeePrices[selectedCoffee] * singlesGrams).toFixed(2)}`;
-            document.getElementById('double-shot-price').innerText = `Double Shot Price: $${(coffeePrices[selectedCoffee] * doublesGrams).toFixed(2)}`;
-            const dailyTotal = (singles * singlesGrams * coffeePrices[selectedCoffee]) + (doubles * doublesGrams * coffeePrices[selectedCoffee]);
-            const monthlyTotal = ((dailyTotal * 365) / 12).toFixed(2);
-            let formattedTotal;
-            if (monthlyTotal > 999) {
-                formattedTotal = `${(monthlyTotal / 1000).toFixed(2)} kg`;
-            } else {
-                formattedTotal = `${monthlyTotal} g`;
-            }
-            document.getElementById('total').innerText = `Monthly Total: ${formattedTotal}`;
-        }
-
-        function calculateTotal() {
-            const singles = parseInt(document.getElementById('singles').value);
-            const singlesGrams = parseInt(document.getElementById('singles-grams').value);
-            const doubles = parseInt(document.getElementById('doubles').value);
-            const doublesGrams = parseInt(document.getElementById('doubles-grams').value);
-            const selectedCoffee = document.getElementById('drink').value;
-
-            const singlesPrice = singles * singlesGrams * coffeePrices[selectedCoffee]; // Calculate cost based on selected coffee price
-            const doublesPrice = doubles * doublesGrams * coffeePrices[selectedCoffee]; // Calculate cost based on selected coffee price
-
-            const totalPrice = singlesPrice + doublesPrice;
-        }
-    </script> -->
 </body>
 
 </html>
