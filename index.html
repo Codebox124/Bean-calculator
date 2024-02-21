@@ -18,6 +18,11 @@
             src: url('/font/So╠êhneBreit-Extraleicht.otf') format('opentype');
 
         }
+        @font-face {
+            font-family: 'Sohne 3';
+            src: url('/font/So╠êhne-Kra╠êftig.otf') format('opentype');
+
+        }
 
         body {
             font-family: 'Sohne', sans-serif;
@@ -32,6 +37,9 @@
         .light {
             font-family: 'Sohne 2', sans-serif;
         }
+        .font_1{
+            font-family: 'Sohne 3', sans-serif;
+        }
     </style>
 
 
@@ -40,7 +48,7 @@
 <body class="bg-gray-100">
     <div class="container mx-auto max-w-3xl mt-8 ">
         <div class="px-3">
-            <h1 class="text-3xl md:text-center font-bold mb-4">Bean Calculator</h1>
+            <h1 class="text-xl md:text-center font-bold mb-4">BEAN CALCULATOR</h1>
             <select style="border-color: rgb(88, 51, 51);" id="drink"
                 class="px-4 py-2  md:hidden flex mb-16  bg-white px-2 focus:outline-none focus:border-blue-500">
                 <option value="triple_o">Triple O</option>
@@ -55,7 +63,7 @@
 
         <div class="flex flex-col space-y-4">
             <div style="border-color: rgb(88, 51, 51);" class="flex items-center justify-between px-4 md:border-b-2  ">
-                <label for="drink" class="font-bold uppercase  ">Each day we drink..</label>
+                <label for="drink" class="font-bold uppercase font_1 text-xl ">Each day we drink..</label>
                 <select style="border-color: rgb(88, 51, 51);" id="drink"
                     class="px-4 py-2 border-t-2 border-l-2 border-r-2 hidden md:flex  bg-transparent px-2 focus:outline-none focus:border-blue-500">
                     <option value="triple_o">Triple O</option>
@@ -72,8 +80,8 @@
                 <div class="flex flex-col md:mt-20 mt-10  md:mt-5  gap-7">
                     <div class="flex gap-2">
                         <label for="singles" class="font-bold uppercase">Singles </label>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="213px"
-                            height="22px" viewBox="0 0 213 22" version="1.1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                            height="22px"  viewBox="0 0 213 22" version="1.1">
                             <title>arrow-right-feathericons</title>
                             <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -106,7 +114,7 @@
                             <option value="9">9g</option>
                             <option value="10">10g</option>
                         </select>
-                        <div class="flex gap-7 light">
+                        <div class="flex md:gap-7 gap-3 light">
                             <div>
                                 FROM
                             </div><span class="font-bold" id="single-shot-price"></span>
@@ -158,7 +166,7 @@
                             <option value="23">23g</option>
                             <option value="24">24g</option>
                         </select>
-                        <div class="flex gap-7 light">
+                        <div class="flex md:gap-7 gap-3 light">
                             <div>
                                 FROM
                             </div><span class="font-bold" id="double-shot-price"></span>
@@ -170,7 +178,7 @@
                 </div>
 
             </div>
-            <div id="total" style="background-color:  #323232;"
+            <div id="total" style="background-color:  #4b4b4b;"
                 class="mt-4 flex flex-col gap-3 font-medium bg-stone-700 py-10 text-white px-4 md:text-center ">
                 <h1 class="md:text-xl text-sm"><span class="font-bold">PER MONTH </span>I NEED TO ORDER... </h1>
 
