@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffee Subscription Calculator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
         @font-face {
             font-family: 'Sohne';
@@ -65,6 +66,19 @@
         .font_1 {
             font-family: 'Sohne 4', sans-serif;
         }
+
+        .swiper-container {
+            width: 90%;
+            margin: 10 auto;
+            height: auto;
+            overflow: hidden;
+            /* Set overflow to hidden */
+        }
+        .logo{
+            display: flex;
+            align-items: center;
+
+        }
     </style>
 
 
@@ -72,24 +86,17 @@
 
 <body class="bg-[#F0F0EA]">
     <div class="container mx-auto max-w-4xl mt-8 ">
-        <div class="px-3">
-            <h1 class="text-xl md:text-center font-bold mb-4">BEAN CALCULATOR</h1>
-            <select style="border-color: rgb(88, 51, 51);" id="drink"
-                class="px-4 py-2  md:hidden flex mb-16  bg-white px-2 focus:outline-none focus:border-blue-500">
-                <option value="triple_o">Triple O</option>
-                <option value="bingo_bango">Bingo Bango</option>
-                <option value="debuzzed">Debuzzed</option>
-                <option value="cherry_bombe">Cherry Bombe</option>
-                <option value="fully_stoked">Fully Stoked</option>
-                <option value="high_jinks">High Jinks</option>
-                <option value="playground">Playground</option>
-            </select>
+        <div class="px-3 logo flex gap-2 items-center mb-10">
+            <img src="/imgs/Capture2.PNG" width="30" alt="">
+            <h1 class="text-xl  font-bold ">BEAN CALCULATOR</h1>
+          
         </div>
 
         <div class="flex flex-col space-y-4">
             <div style="border-color: rgb(88, 51, 51);" class="flex items-center justify-between px-4 md:border-b-2  ">
-                <label for="drink" class="font-bold uppercase font_1 text-xl ">Each day we drink...</label>
-                <select style="border-color: rgb(88, 51, 51);" id="drink"
+                <label for="drink" class="font-bold uppercase font_1 text-xl hidden md:block ">Each day we drink...</label>
+
+                <!-- <select style="border-color: rgb(88, 51, 51);" id="drink"
                     class="px-4 py-2 border-t-2 border-l-2 border-r-2 hidden md:flex  bg-transparent px-2 focus:outline-none focus:border-blue-500">
                     <option value="triple_o">Triple O</option>
                     <option value="bingo_bango">Bingo Bango</option>
@@ -98,8 +105,42 @@
                     <option value="fully_stoked">Fully Stoked</option>
                     <option value="high_jinks">High Jinks</option>
                     <option value="playground">Playground</option>
-                </select>
+                </select> -->
             </div>
+            <div class="swiper-container  ">
+                <div class="swiper-wrapper flex justify-center">
+                    
+                    <div class="swiper-slide flex justify-center flex-col items-center" data-value="bingo_bango">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>Bingo Bango</p>
+                    </div>
+                    <div class="swiper-slide flex justify-center flex-col items-center"data-value="debuzzed">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>Debuzzed</p>
+                    </div>
+                    <div class="swiper-slide flex justify-center flex-col items-center" data-value="cherry_bombe">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>Cherry Bombe</p>
+                    </div>
+                    <div class="swiper-slide flex justify-center flex-col items-center" data-value="fully_stoked">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>Fully Stoked</p>
+                    </div>
+                    <div class="swiper-slide flex justify-center flex-col items-center" data-value="high_jinks">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>High Jinks</p>
+                    </div>
+                    <div class="swiper-slide flex justify-center flex-col items-center" data-value="playground">
+                        <img src="/imgs/Capture.PNG" alt="Triple O">
+                        <p>Playground</p>
+                    </div>
+                    <!-- Add more slides for other coffee options -->
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <label for="drink" class="font-bold uppercase font_1 text-xl md:hidden  ">Each day we drink...</label>
+
 
             <div class="md:flex px-4 gap-9  md:flex-row flex-col items-center   justify-between">
                 <div class="flex flex-col md:mt-20 mt-10  md:mt-5  gap-7">
@@ -194,7 +235,27 @@
 
         </div>
     </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1, // Display only 1 slide at a time
+            spaceBetween: 0,
+            centeredSlides: true,
+            loop: true,
+            slideToClickedSlide: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // Add event listener to handle coffee selection
+        swiper.on('click', function () {
+            var selectedCoffee = swiper.clickedSlide.dataset.value;
+            document.getElementById('drink').value = selectedCoffee;
+            calculateTotal(); // Call calculateTotal function when a coffee is selected
+        });
 
         var coffeePrices = {
             "triple_o": 55,
